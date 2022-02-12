@@ -5,7 +5,6 @@ const ITEMS = new Array(100).fill(null)
 
 const Item: FC = () => {
   const { url, isLoading, error } = useCancelableImage({ src: 'https://picsum.photos/5000' })
-  console.log(error)
   return (
     <div className='imageListItem'>
       {isLoading && <span>Loading...</span>}
