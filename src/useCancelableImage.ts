@@ -16,7 +16,7 @@ export default function useCancelableImage({
     onFail
    })
 
-    function handleFetchComplete(blob: Blob) {
+  function handleFetchComplete(blob: Blob) {
     const imageObjectURL = URL.createObjectURL(blob);
     setUrl(imageObjectURL)
     onComplete && onComplete(imageObjectURL)
