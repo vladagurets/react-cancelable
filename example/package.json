@@ -1,23 +1,34 @@
 {
-  "name": "example",
-  "version": "0.1.0",
+  "name": "react-cancelable-example",
+  "version": "1.0.0",
   "private": true,
+  "description": "Make cancelable requests with react-hooks",
+  "author": "Vladyslav Ohirenko <aguretsvlad@gmail.com",
+  "homepage": "https://vladagurets.github.io/react-cancelable/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vladagurets/react-cancelable/"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  },
   "dependencies": {
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "react-cancelable": "link:..",
     "react-scripts": "5.0.0",
     "typescript": "^4.4.2",
-    "react-cancelable": "link:..",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
