@@ -48,6 +48,7 @@ function App() {
     setIsListVisible(true);
     timerRef.current && clearInterval(timerRef.current)
     setHideTimeout(5)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSection])
   return (
     <div className="App">
