@@ -4,7 +4,7 @@ import { useCancelableImage } from 'react-cancelable'
 const ITEMS = new Array(100).fill(null)
 
 const Item: FC = () => {
-  const { url, isLoading, error } = useCancelableImage({ src: 'https://picsum.photos/1000' })
+  const { url, isLoading, error } = useCancelableImage({ src: 'https://picsum.photos/5000' })
   return (
     <div className='imageListItem'>
       {isLoading && <span>Loading...</span>}
