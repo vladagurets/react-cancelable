@@ -21,3 +21,7 @@ declare type UseCancelableImageReturn = {
     error?: Error;
     isLoading: boolean;
 };
+declare type RejectOrCbOpts = {
+    isMounted: boolean;
+    data: any;
+};

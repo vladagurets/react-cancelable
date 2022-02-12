@@ -24,3 +24,8 @@ type UseCancelableImageReturn = {
   error?: Error;
   isLoading: boolean;
 }
+
+type RejectOrCbOpts = {
+  isMounted: boolean;
+  data: any;
+}
