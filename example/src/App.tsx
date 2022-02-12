@@ -3,16 +3,6 @@ import RequestDemo from './components/RequestDemo'
 import ImageDemo from './components/ImageDemo'
 import './App.css';
 
-// TODO:
-// - add github icon
-// - add docs
-// - publish to npm
-// - write an article
-// - implement cancelable request (pased on p-cancelable)
-// 
-
-// tsc -w
-
 type Section = 'useCancelableRequest' | 'useCancelableImage';
 
 const SectionComponent = {
