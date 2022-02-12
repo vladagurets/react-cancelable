@@ -1,48 +1,78 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import RequestDemo from './components/RequestDemo'
+import ImageDemo from './components/ImageDemo'
 import './App.css';
-import { useCancelableReq } from 'react-cancelable'
 
-const ITEMS = new Array(100).fill(null)
+// TODO:
+// - add github icon
+// - add docs
+// - add CI/CD for example
+// - publish to npm
 
-function randomInteger(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
-const Item: FC = () => {
-  const { res, isLoading, error } = useCancelableReq({ src: 'https://httpbin.org/get' })
-  console.log(error, res)
-  return (
-    <div className="Item">
-      {isLoading && <span>Loading...</span>}
-      <br />
-      {res && <span>Data fetched!</span>}
-      <br />
-      {error && <span>{error.message || error.code || 'Error'}</span>}
-    </div>
-  )
+// tsc -w
+
+type Section = 'useCancelableRequest' | 'useCancelableImage';
+
+const SectionComponent = {
+  useCancelableRequest: RequestDemo,
+  useCancelableImage: ImageDemo,
 }
 
 function App() {
   const [isListVisible, setIsListVisible] = useState(true)
+  const [activeSection, setActiveSection] = useState<Section>('useCancelableRequest')
+  const spanRef = useRef<HTMLSpanElement>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const DemoComponent = SectionComponent[activeSection]
+  const sectionNames = Object.keys(SectionComponent)
+  
+  function setHideTimeout(sec: number) {
+    if (spanRef?.current) {
+      spanRef.current.innerText = sec.toString();
+    }
+
+    if (sec > 0) {
+      timerRef.current = setTimeout(() => {
+        setHideTimeout(--sec);
+      }, 1000);
+    } else {
+      setIsListVisible(false)
+    }
+  }
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsListVisible(false)
-    }, 3000);
-  }, [])
+    setIsListVisible(true);
+    timerRef.current && clearInterval(timerRef.current)
+    setHideTimeout(5)
+  }, [activeSection])
   return (
     <div className="App">
-      <h1>Examples of react-cancelable</h1>
+      <div>
+        <h1>react-cancelable</h1>
+        <span>Open Network tab to be sure all pending requests will be canceled</span>
+      </div>
+      <br />
+      <div className='timer'>
+        <span>Requests will be canceled in <span ref={spanRef}></span></span>
+      </div>
+      <br />
+      <div className='tabs'>
+        {sectionNames.map(key => (
+          <h2
+            className={activeSection === key ? 'tabName tabName-active' : 'tabName'}
+            onClick={() => setActiveSection(key as Section)}
+          >
+            <code className='code'>{key}</code>
+          </h2>
+        ))}
+      </div>
       {
-        !isListVisible && <h3>List is unmounted. Pending requests are canceled.</h3>
+        !isListVisible && <h4>List is unmounted. Pending requests are canceled.</h4>
       }
       {
-        isListVisible &&
-          <div className="List">
-            {
-              ITEMS.map((el, i) => <Item key={i} />)
-            }
-          </div>
+        isListVisible && <DemoComponent />
       }
     </div>
   );

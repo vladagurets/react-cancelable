@@ -37,11 +37,52 @@
   }
 }
 
-.List {
+.code {
+  background-color: lightblue;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.container {
+  padding: 0 40px;
+}
+
+.list {
   display: flex;
   flex-direction: column;
 }
 
-.Item {
+.listItem {
   margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid grey;
+}
+
+.timer {
+  margin: 40px 0;
+}
+
+.imageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tabName {
+  opacity: .5;
+}
+
+.tabName-active {
+  opacity: 1;
+}
+
+.tabName:hover {
+  opacity: .7;
 }

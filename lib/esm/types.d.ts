@@ -10,3 +10,14 @@ declare type UseCancelableReqReturn = {
     error?: Error;
     isLoading: boolean;
 };
+declare type UseCancelableImageParams = {
+    src: string;
+    fetchParams?: RequestInit;
+    onFail?: (error: any) => void;
+    onComplete?: (res: any) => void;
+};
+declare type UseCancelableImageReturn = {
+    url?: string;
+    error?: Error;
+    isLoading: boolean;
+};

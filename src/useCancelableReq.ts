@@ -7,7 +7,7 @@ const RES_TYPES_TO_PARSER = {
   default: 'blob'
 }
 
-function getResParser(contentType: string) {
+function getResParser(contentType: string): string {
   if (contentType.includes('application/json')) {
     return RES_TYPES_TO_PARSER.json
   }
@@ -35,15 +35,18 @@ export default function useCancelableReq({
 
   function onSetRes(res: any) {
     setRes(res)
+    setIsLoading(false)
     onComplete && onComplete(res)
   }
 
   function processRes(response: Response) {
-    const resHandler = resType || getResParser(response.headers.get('Content-Type') || 'default');
-
-    response[resHandler]().then((_response: any) => {
-      (response.ok ? onSetRes : onSetError)(_response)
-    })
+    if (response.ok) {
+      const resHandler = resType || getResParser(response.headers.get('Content-Type') || 'default');
+      response[resHandler]().then(onSetRes)
+    } else {
+      const resHandler = getResParser(response.headers.get('Content-Type') || 'default');
+      response[resHandler]().then(onSetError)
+    }
   }
 
   useEffect(() => {
