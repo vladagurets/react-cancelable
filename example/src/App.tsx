@@ -6,7 +6,6 @@ import './App.css';
 // TODO:
 // - add github icon
 // - add docs
-// - add CI/CD for example
 // - publish to npm
 // - write an article
 // - implement cancelable request (pased on p-cancelable)
