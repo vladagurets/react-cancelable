@@ -39,13 +39,23 @@ export default function useCancelableReq({
     onComplete && onComplete(res)
   }
 
-  function processRes(response: Response) {
+  function processRes(response: Response, isMounted: boolean) {
     if (response.ok) {
       const resHandler = resType || getResParser(response.headers.get('Content-Type') || 'default');
-      response[resHandler]().then(onSetRes)
+      response[resHandler]()
+        .then((_response: any) => rejectOrCb(isMounted, onSetRes, _response))
     } else {
       const resHandler = getResParser(response.headers.get('Content-Type') || 'default');
-      response[resHandler]().then(onSetError)
+      response[resHandler]()
+        .then((_response: any) => rejectOrCb(isMounted, onSetError, _response))
+    }
+  }
+
+  function rejectOrCb(isMounted: boolean, cb: Function, ...rest: any[]) {
+    if (isMounted) {
+      cb(...rest)
+    } else {
+      rejectPromiseChain()
     }
   }
 
@@ -58,8 +68,8 @@ export default function useCancelableReq({
       ...fetchParams,
       signal: controller.signal,
     })
-      .then(response => (isMounted ? processRes(response) : rejectPromiseChain()))
-      .catch(onSetError);
+      .then(response => rejectOrCb(isMounted, processRes, response, isMounted))
+      .catch(error => rejectOrCb(isMounted, onSetError, error))
 
     return () => {
       isMounted = false;

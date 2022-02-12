@@ -63,6 +63,7 @@ function App() {
       <div className='tabs'>
         {sectionNames.map(key => (
           <h2
+            key={key}
             className={activeSection === key ? 'tabName tabName-active' : 'tabName'}
             onClick={() => setActiveSection(key as Section)}
           >
