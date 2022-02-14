@@ -11,7 +11,7 @@ type BaseCancelableReturn = {
   error?: Error;
   isLoading: boolean;
   cancel: VoidFunction;
-  makeLazyRequest: Function | null;
+  makeLazyRequest: VoidFunction | null;
 }
 
 type UseCancelableReqReturn = BaseCancelableReturn & {
