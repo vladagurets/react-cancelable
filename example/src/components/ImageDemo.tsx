@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { useCancelableImage } from 'react-cancelable'
+import axios from 'axios'
 
 const ITEMS = new Array(100).fill(null)
 
 function getImage(controller: AbortController) {
-  return fetch('https://picsum.photos/5000', { signal: controller.signal })
+  return axios('https://picsum.photos/5000', { signal: controller.signal, responseType: 'blob' })
+  // return fetch('https://picsum.photos/5000', { signal: controller.signal })
 }
 
 const Item: FC = () => {

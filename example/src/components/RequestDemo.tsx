@@ -1,14 +1,19 @@
 import React, { FC } from 'react';
 import { useCancelableReq } from 'react-cancelable'
+import axios from 'axios'
 
-const ITEMS = new Array(100).fill(null)
+const ITEMS = new Array(3).fill(null)
+
+// https://httpbin.org/bytes/rr - Error 404 with body
+// https://httpbin.org/delay/${randomInteger(1,5)} - random delay with body
 
 function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function getSomething(controller: AbortController) {
-  return fetch(`https://httpbin.org/delay/${randomInteger(1,5)}`, { signal: controller.signal })
+  return axios(`https://httpbin.org/delay/${randomInteger(1,5)}`, { signal: controller.signal })
+  // return fetch(`https://httpbin.org/bytes/rr`, { signal: controller.signal })
 }
 
 const Item: FC = () => {

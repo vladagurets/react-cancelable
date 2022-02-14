@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { rejectOrCb, getResParser } from "./utils";
+import { rejectOrCb, getResParser, getCTypeHeaderVal } from "./utils";
 
 export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableReqReturn {
   const { onComplete, onFail } = opts || {};
@@ -23,11 +23,18 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   }
 
   function processResult(response: Response, isMounted: boolean) {
-    const resHandler = getResParser(response.headers.get('Content-Type') || 'default');
+    const contentheader = getCTypeHeaderVal(response)
+    const resHandler = getResParser(contentheader)
 
-    response[resHandler]()
-      .then((data: any) => rejectOrCb(response.ok ? handleSetResData : handleSetError, { isMounted, data }))
-      .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error }))
+    if (response['data']) {
+      // Get `axios` res data
+      rejectOrCb(handleSetResData, { isMounted, data: response['data'] })
+    } else {
+      // Get `fetch` res data
+      response[resHandler]()
+        .then((data: any) => rejectOrCb(response.ok ? handleSetResData : handleSetError, { isMounted, data }))
+        .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error }))
+    }
   }
 
   useEffect(() => {
@@ -35,7 +42,7 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
 
     fn(abortController)
       .then(response => rejectOrCb(processResult, { isMounted, data: response }))
-      .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error }))
+      .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error.response || error }))
 
     return () => {
       isMounted = false;
