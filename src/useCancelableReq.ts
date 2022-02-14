@@ -2,13 +2,13 @@ import { useState, useEffect, useMemo } from "react";
 import { rejectOrCb, getResParser, getCTypeHeaderVal } from "./utils";
 
 export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableReqReturn {
-  const { onComplete, onFail } = opts || {};
+  const { controller, onComplete, onFail } = opts || {};
 
   const [isLoading, setIsLoading] = useState(true);
   const [res, setRes] = useState<Response>();
   const [error, setError] = useState<Error>();
 
-  const abortController = useMemo(() => new AbortController(), [])
+  const abortController = useMemo(() => controller || new AbortController(), [])
 
   function handleSetError(data: any) {
     setError(data);

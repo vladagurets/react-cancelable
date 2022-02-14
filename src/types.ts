@@ -1,4 +1,5 @@
 type UseCancelableReqParams = {
+  controller?: AbortController;
   onFail?: (error: any) => void;
   onComplete?: (res: any) => void;
 }

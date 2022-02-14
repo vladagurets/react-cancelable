@@ -43,12 +43,12 @@ export function getCTypeHeaderVal(response: Response): string {
 /**
  * @description HOF for requests
  */
-export function cancelable(fn: CancelableRequestFn): ExtendedPromise {
-  const controller = new AbortController()
+export function cancelable(fn: CancelableRequestFn, controller?: AbortController): ExtendedPromise {
+  const _controller = controller || new AbortController()
 
-  const promise = fn(controller)
+  const promise = fn(_controller)
 
-  promise['stop'] = () => controller.abort()
+  promise['stop'] = () => _controller.abort()
 
   return promise as ExtendedPromise
 }

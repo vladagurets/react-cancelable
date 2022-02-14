@@ -6,9 +6,10 @@ import useCancelableReq from "./useCancelableReq";
  * `fn` must return a Request as Blob
  */
 export default function useCancelableImage(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableImageReturn {
-  const { onComplete, onFail } = opts || {};
+  const { controller, onComplete, onFail } = opts || {};
 
   const { isLoading, error } = useCancelableReq(fn, {
+    controller,
     onComplete: handleComplete,
     onFail
   });
