@@ -1,87 +1,50 @@
-import { useState, useEffect } from "react";
-import rejectPromiseChain from "./rejectPromiseChain";
+import { useState, useEffect, useMemo } from "react";
+import { rejectOrCb, getResParser } from "./utils";
 
-const RES_TYPES_TO_PARSER = {
-  'json': 'json',
-  'text': 'text',
-  default: 'blob'
-}
+export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableReqReturn {
+  const { onComplete, onFail } = opts || {};
 
-function getResParser(contentType: string): string {
-  if (contentType.includes('application/json')) {
-    return RES_TYPES_TO_PARSER.json
-  }
-
-  const type = contentType.split('/').shift()
-  return type && RES_TYPES_TO_PARSER[type] || RES_TYPES_TO_PARSER.default;
-}
-
-export default function useCancelableReq({
-  src,
-  resType,
-  fetchParams = {},
-  onComplete,
-  onFail,
-}: UseCancelableReqParams): UseCancelableReqReturn {
   const [isLoading, setIsLoading] = useState(true);
   const [res, setRes] = useState<Response>();
   const [error, setError] = useState<Error>();
 
-  function onSetError(e: any) {
+  const abortController = useMemo(() => new AbortController(), [])
+
+  function handleSetError(e: any) {
     setError(e);
     setIsLoading(false);
     onFail && onFail(e)
   }
 
-  function onSetRes(res: any) {
+  function handleSetRes(res: any) {
     setRes(res)
     setIsLoading(false)
     onComplete && onComplete(res)
   }
 
-  function processRes(response: Response, isMounted: boolean) {
-    if (response.ok) {
-      const resHandler = resType || getResParser(response.headers.get('Content-Type') || 'default');
-      response[resHandler]()
-        .then((data: any) => rejectOrCb(onSetRes, { isMounted, data }))
-    } else {
-      const resHandler = getResParser(response.headers.get('Content-Type') || 'default');
-      response[resHandler]()
-        .then((data: any) => rejectOrCb(onSetError, { isMounted, data }))
-    }
-  }
+  function processResult(response: Response, isMounted: boolean) {
+    const resHandler = getResParser(response.headers.get('Content-Type') || 'default');
 
-  function rejectOrCb(cb: Function, opts: RejectOrCbOpts) {
-    const { isMounted, data } = opts
-    if (isMounted) {
-      cb(data, isMounted)
-    } else {
-      rejectPromiseChain()
-      
-    }
+    response[resHandler]()
+      .then((data: any) => rejectOrCb(response.ok ? handleSetRes : handleSetError, { isMounted, data }))
+      .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error }))
   }
 
   useEffect(() => {
     let isMounted = true;
 
-    const controller = new AbortController();
-
-    fetch(src, {
-      ...fetchParams,
-      signal: controller.signal,
-    })
-      .then(response => rejectOrCb(processRes, { isMounted, data: response }))
-      .catch(error => rejectOrCb(onSetError, { isMounted, data: error }))
+    fn(abortController)
+      .then(response => rejectOrCb(processResult, { isMounted, data: response }))
+      .catch(error => rejectOrCb(handleSetError, { isMounted, data: error }))
 
     return () => {
       isMounted = false;
 
-      if (!controller.signal.aborted) {
-        controller.abort();
+      if (!abortController.signal.aborted) {
+        abortController.abort();
       }
     };
-  }, []);
-
+  }, [])
   return {
     res,
     error,

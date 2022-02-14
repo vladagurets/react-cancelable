@@ -3,8 +3,13 @@ import { useCancelableImage } from 'react-cancelable'
 
 const ITEMS = new Array(100).fill(null)
 
+function getImage(controller: AbortController) {
+  return fetch('https://picsum.photos/5000', { signal: controller.signal })
+}
+
 const Item: FC = () => {
-  const { url, isLoading, error } = useCancelableImage({ src: 'https://picsum.photos/5000' })
+  const { url, isLoading, error } = useCancelableImage(getImage)
+
   return (
     <div className='imageListItem'>
       {isLoading && <span>Loading...</span>}

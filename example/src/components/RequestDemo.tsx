@@ -7,8 +7,13 @@ function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getSomething(controller: AbortController) {
+  return fetch(`https://httpbin.org/delay/${randomInteger(1,5)}`, { signal: controller.signal })
+}
+
 const Item: FC = () => {
-  const { res, isLoading, error } = useCancelableReq({ src: `https://httpbin.org/delay/${randomInteger(1,5)}` })
+  const { res, isLoading, error } = useCancelableReq(getSomething)
+
   return (
     <div className='listItem'>
       {isLoading && <span>Loading...</span>}
