@@ -13,8 +13,8 @@ export function getResParser(contentType: string): string {
   return type && RES_TYPES_TO_PARSER[type] || RES_TYPES_TO_PARSER.default;
 }
 
-export function rejectPromiseChain() {
-  return Promise.reject('[react-cancelable] Request canceled');
+export function stopPromiseChain() {
+  return Promise.resolve();
 }
 
 export function rejectOrCb(cb: Function, opts: RejectOrCbOpts) {
@@ -22,6 +22,6 @@ export function rejectOrCb(cb: Function, opts: RejectOrCbOpts) {
   if (isMounted) {
     cb(data, isMounted)
   } else {
-    rejectPromiseChain()
+    stopPromiseChain()
   }
 }

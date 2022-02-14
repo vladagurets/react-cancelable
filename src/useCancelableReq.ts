@@ -10,23 +10,23 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
 
   const abortController = useMemo(() => new AbortController(), [])
 
-  function handleSetError(e: any) {
-    setError(e);
+  function handleSetError(data: any) {
+    setError(data);
     setIsLoading(false);
-    onFail && onFail(e)
+    onFail && onFail(data)
   }
 
-  function handleSetRes(res: any) {
-    setRes(res)
+  function handleSetResData(data: any) {
+    setRes(data)
     setIsLoading(false)
-    onComplete && onComplete(res)
+    onComplete && onComplete(data)
   }
 
   function processResult(response: Response, isMounted: boolean) {
     const resHandler = getResParser(response.headers.get('Content-Type') || 'default');
 
     response[resHandler]()
-      .then((data: any) => rejectOrCb(response.ok ? handleSetRes : handleSetError, { isMounted, data }))
+      .then((data: any) => rejectOrCb(response.ok ? handleSetResData : handleSetError, { isMounted, data }))
       .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error }))
   }
 
@@ -35,7 +35,7 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
 
     fn(abortController)
       .then(response => rejectOrCb(processResult, { isMounted, data: response }))
-      .catch(error => rejectOrCb(handleSetError, { isMounted, data: error }))
+      .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error }))
 
     return () => {
       isMounted = false;
