@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useCancelableImage } from 'react-cancelable'
 import axios from 'axios'
 
-const ITEMS = new Array(100).fill(null)
+const ITEMS = new Array(50).fill(null)
 
 function getImage(controller: AbortController) {
   return axios('https://picsum.photos/5000', { signal: controller.signal, responseType: 'blob' })
@@ -10,15 +10,12 @@ function getImage(controller: AbortController) {
 }
 
 const Item: FC = () => {
-  const { url, isLoading, error } = useCancelableImage(getImage)
+  const { url, isLoading } = useCancelableImage(getImage)
 
   return (
     <div className='imageListItem'>
       {isLoading && <span>Loading...</span>}
-      <br />
-      { url && <img alt='Fetched' src={url} width='200' height='200' /> }
-      <br />
-      {error && <span>{error}</span>}
+      {url && <img className='imgPreview' alt='Fetched' src={url} /> }
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useCancelableReq } from 'react-cancelable'
 import axios from 'axios'
 
-const ITEMS = new Array(3).fill(null)
+const ITEMS = new Array(50).fill(null)
 
 // https://httpbin.org/bytes/rr - Error 404 with body
 // https://httpbin.org/delay/${randomInteger(1,5)} - random delay with body

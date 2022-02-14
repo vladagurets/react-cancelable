@@ -61,12 +61,14 @@ function App() {
           </h2>
         ))}
       </div>
-      {
-        !isListVisible && <h4>List is unmounted. Pending requests are canceled.</h4>
-      }
-      {
-        isListVisible && <DemoComponent />
-      }
+     <div className='content'>
+        {
+          !isListVisible && <h4>List is unmounted. Pending requests are canceled.</h4>
+        }
+        {
+          isListVisible && <DemoComponent />
+        }
+     </div>
     </div>
   );
 }

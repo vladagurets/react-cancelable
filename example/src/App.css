@@ -59,7 +59,7 @@
 }
 
 .timer {
-  margin: 40px 0;
+  margin: 40px 0 0 0;
 }
 
 .imageList {
@@ -68,15 +68,20 @@
   gap: 20px;
 }
 
+.content {
+  margin-top: 40px;
+}
+
 .tabs {
   display: flex;
-  gap: 40px;
+  flex-wrap: wrap;
+  column-gap: 40px;
   justify-content: center;
   cursor: pointer;
 }
 
 .tabName {
-  opacity: .5;
+  opacity: .3;
 }
 
 .tabName-active {
@@ -85,4 +90,38 @@
 
 .tabName:hover {
   opacity: .7;
+}
+
+.imgPreview {
+  width: 100%;
+}
+
+.imageList {
+  justify-content: center;
+}
+
+.imageListItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width : 320px) {
+  .imageListItem {
+    width: 20%;
+  }
+
+  .tabName {
+    font-size: 22px;
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  .imageListItem {
+    width: 100px;
+  }
+
+  .tabName {
+    font-size: 34px;
+  }
 }
