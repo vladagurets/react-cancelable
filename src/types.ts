@@ -21,3 +21,7 @@ type RejectOrCbOpts = {
 }
 
 type CancelableRequestFn = (controller: AbortController) => Promise<any>
+
+type ExtendedPromise = Promise<any> & {
+  stop: VoidFunction
+}
