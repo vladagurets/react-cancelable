@@ -3,11 +3,11 @@ import RequestDemo from './components/RequestDemo'
 import ImageDemo from './components/ImageDemo'
 import './App.css';
 
-type Section = 'useCancelableRequest' | 'useCancelableImage';
+type Section = 'useCancelableRequest' | 'useCancelableImg';
 
 const SectionComponent = {
   useCancelableRequest: RequestDemo,
-  useCancelableImage: ImageDemo,
+  useCancelableImg: ImageDemo,
 }
 
 function App() {

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useCancelableImage } from 'react-cancelable'
+import { useCancelableImg } from 'react-cancelable'
 import axios from 'axios'
 
 const ITEMS = new Array(50).fill(null)
@@ -10,7 +10,7 @@ function getImage(controller: AbortController) {
 }
 
 const Item: FC = () => {
-  const { url, isLoading } = useCancelableImage(getImage)
+  const { url, isLoading } = useCancelableImg(getImage)
 
   return (
     <div className='imageListItem'>

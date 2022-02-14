@@ -10,7 +10,7 @@ type UseCancelableReqReturn = {
   isLoading: boolean;
 }
 
-type UseCancelableImageReturn = {
+type UseCancelableImgReturn = {
   url?: string;
   error?: Error;
   isLoading: boolean;
@@ -24,5 +24,5 @@ type RejectOrCbOpts = {
 type CancelableRequestFn = (controller: AbortController) => Promise<any>
 
 type ExtendedPromise = Promise<any> & {
-  stop: VoidFunction
+  cancel: VoidFunction
 }

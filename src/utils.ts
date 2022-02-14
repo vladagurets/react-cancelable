@@ -48,7 +48,7 @@ export function cancelable(fn: CancelableRequestFn, controller?: AbortController
 
   const promise = fn(_controller)
 
-  promise['stop'] = () => _controller.abort()
+  promise['cancel'] = () => _controller.abort()
 
   return promise as ExtendedPromise
 }
