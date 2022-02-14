@@ -1,4 +1,6 @@
 type UseCancelableReqParams = {
+  isLazy?: boolean;
+  cancelOnUnmount?: boolean;
   controller?: AbortController;
   onFail?: (error: any) => void;
   onComplete?: (res: any) => void;
@@ -9,6 +11,7 @@ type BaseCancelableReturn = {
   error?: Error;
   isLoading: boolean;
   cancel: VoidFunction;
+  makeLazyRequest: Function | null;
 }
 
 type UseCancelableReqReturn = BaseCancelableReturn & {

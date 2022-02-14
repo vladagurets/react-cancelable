@@ -2,7 +2,14 @@ import { useState, useEffect, useMemo } from "react";
 import { rejectOrCb, getResParser, getCTypeHeaderVal } from "./utils";
 
 export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableReqReturn {
-  const { controller, onComplete, onFail, onCancel } = opts || {};
+  const {
+    isLazy = false,
+    cancelOnUnmount = true,
+    controller,
+    onComplete,
+    onFail,
+    onCancel
+  } = opts || {};
 
   const [isLoading, setIsLoading] = useState(true);
   const [res, setRes] = useState<Response>();
@@ -42,25 +49,39 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
     }
   }
 
+  function makeRequest() {
+    fn(abortController)
+      .then(response => rejectOrCb(processResult, { isMounted: true, data: response }))
+      .catch((error: any) => rejectOrCb(handleSetError, { isMounted: true, data: error.response || error }))
+  }
+
   useEffect(() => {
     let isMounted = true;
 
-    fn(abortController)
-      .then(response => rejectOrCb(processResult, { isMounted, data: response }))
-      .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error.response || error }))
+    if (!isLazy) {
+      fn(abortController)
+        .then(response => rejectOrCb(processResult, { isMounted, data: response }))
+        .catch((error: any) => rejectOrCb(handleSetError, { isMounted, data: error.response || error }))
+    }
 
-    return () => {
-      isMounted = false;
+    if (cancelOnUnmount) {
+      return () => {
+        isMounted = false;
+  
+        if (!abortController.signal.aborted) {
+          abortController.abort();
+        }
+      };
+    }
 
-      if (!abortController.signal.aborted) {
-        abortController.abort();
-      }
-    };
+    return;
   }, [])
+
   return {
     res,
     error,
     isLoading,
-    cancel
+    cancel,
+    makeLazyRequest: isLazy ? makeRequest : null
   };
 }

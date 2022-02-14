@@ -6,10 +6,19 @@ import useCancelableReq from "./useCancelableReq";
  * `fn` must return a Request as Blob
  */
 export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableImgReturn {
-  const { controller, onComplete, onFail, onCancel } = opts || {};
-
-  const { isLoading, error, cancel } = useCancelableReq(fn, {
+  const {
+    isLazy = false,
+    cancelOnUnmount = true,
     controller,
+    onComplete,
+    onFail,
+    onCancel
+  } = opts || {};
+
+  const { isLoading, error, cancel, makeLazyRequest } = useCancelableReq(fn, {
+    controller,
+    cancelOnUnmount,
+    isLazy,
     onComplete: handleComplete,
     onFail,
     onCancel
@@ -30,6 +39,7 @@ export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCanc
     url,
     error,
     isLoading,
-    cancel
+    cancel,
+    makeLazyRequest
   };
 }
