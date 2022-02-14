@@ -2,18 +2,21 @@ type UseCancelableReqParams = {
   controller?: AbortController;
   onFail?: (error: any) => void;
   onComplete?: (res: any) => void;
+  onCancel?: () => void;
 }
 
-type UseCancelableReqReturn = {
+type BaseCancelableReturn = {
+  error?: Error;
+  isLoading: boolean;
+  cancel: VoidFunction;
+}
+
+type UseCancelableReqReturn = BaseCancelableReturn & {
   res?: Response;
-  error?: Error;
-  isLoading: boolean;
 }
 
-type UseCancelableImgReturn = {
+type UseCancelableImgReturn = BaseCancelableReturn & {
   url?: string;
-  error?: Error;
-  isLoading: boolean;
 }
 
 type RejectOrCbOpts = {

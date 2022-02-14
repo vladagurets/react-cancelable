@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { rejectOrCb, getResParser, getCTypeHeaderVal } from "./utils";
 
 export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableReqReturn {
-  const { controller, onComplete, onFail } = opts || {};
+  const { controller, onComplete, onFail, onCancel } = opts || {};
 
   const [isLoading, setIsLoading] = useState(true);
   const [res, setRes] = useState<Response>();
@@ -13,13 +13,18 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   function handleSetError(data: any) {
     setError(data);
     setIsLoading(false);
-    onFail && onFail(data)
+    onFail?.(data)
   }
 
   function handleSetResData(data: any) {
     setRes(data)
     setIsLoading(false)
-    onComplete && onComplete(data)
+    onComplete?.(data)
+  }
+
+  function cancel(): void {
+    abortController.abort()
+    onCancel?.()
   }
 
   function processResult(response: Response, isMounted: boolean) {
@@ -56,5 +61,6 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
     res,
     error,
     isLoading,
+    cancel
   };
 }

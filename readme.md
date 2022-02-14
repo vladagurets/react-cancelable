@@ -1,4 +1,3 @@
-
 ## useCancelableReq
 
 Some info about useCancelableReq
@@ -74,3 +73,9 @@ setTimeout(() => {
   request.cancel()
 }, 1000)
 ```
+
+<!-- TODO: Add intro description -->
+<!-- TODO: Add description to each helper -->
+<!-- TODO: Describe best practice to use one controller in multiple requests -->
+<!-- TODO: Describe all options for each helper -->
+<!-- TODO: Add example axios vs fetch -->

@@ -6,12 +6,13 @@ import useCancelableReq from "./useCancelableReq";
  * `fn` must return a Request as Blob
  */
 export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableImgReturn {
-  const { controller, onComplete, onFail } = opts || {};
+  const { controller, onComplete, onFail, onCancel } = opts || {};
 
-  const { isLoading, error } = useCancelableReq(fn, {
+  const { isLoading, error, cancel } = useCancelableReq(fn, {
     controller,
     onComplete: handleComplete,
-    onFail
+    onFail,
+    onCancel
   });
   const [url, setUrl] = useState<string>()
 
@@ -22,12 +23,13 @@ export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCanc
 
     const imageObjectURL = URL.createObjectURL(blob);
     setUrl(imageObjectURL)
-    onComplete && onComplete(imageObjectURL)
+    onComplete?.(imageObjectURL)
   }
 
   return {
     url,
     error,
     isLoading,
+    cancel
   };
 }
