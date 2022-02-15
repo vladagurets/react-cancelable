@@ -1,4 +1,4 @@
-<h1 align="center">react-cancelable</h1>
+<h1 align="center">react-cancelable<i>(alpha)</i></h1>
 <p align="center"><i>Library that improve client's traffic experiense</i></span>
 <br></br>
 
