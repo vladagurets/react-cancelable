@@ -1,5 +1,5 @@
 <p align="center">
-  <h1>react-cancelable</h1>
+  <h1 align="center">react-cancelable</h1>
   <span><i>Library that improve client's traffic experiense</i></span>
   <br></br>
 </p>
