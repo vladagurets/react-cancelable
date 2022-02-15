@@ -11,7 +11,7 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
     onCancel
   } = opts || {};
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!isLazy);
   const [res, setRes] = useState<Response>();
   const [error, setError] = useState<Error>();
 
@@ -50,6 +50,8 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   }
 
   function makeRequest() {
+    setIsLoading(true)
+
     fn(abortController)
       .then(response => rejectOrCb(processResult, { isMounted: true, data: response }))
       .catch((error: any) => rejectOrCb(handleSetError, { isMounted: true, data: error.response || error }))

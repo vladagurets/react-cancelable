@@ -19,7 +19,7 @@ type UseCancelableReqReturn = BaseCancelableReturn & {
 }
 
 type UseCancelableImgReturn = BaseCancelableReturn & {
-  url?: string;
+  src?: string;
 }
 
 type RejectOrCbOpts = {

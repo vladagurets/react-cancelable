@@ -23,7 +23,7 @@ export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCanc
     onFail,
     onCancel
   });
-  const [url, setUrl] = useState<string>()
+  const [src, setSrc] = useState<string>()
 
   function handleComplete(blob: Blob) {
     if (!(blob instanceof Blob)) {
@@ -31,12 +31,12 @@ export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCanc
     }
 
     const imageObjectURL = URL.createObjectURL(blob);
-    setUrl(imageObjectURL)
+    setSrc(imageObjectURL)
     onComplete?.(imageObjectURL)
   }
 
   return {
-    url,
+    src,
     error,
     isLoading,
     cancel,

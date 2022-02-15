@@ -10,12 +10,12 @@ function getImage(controller: AbortController) {
 }
 
 const Item: FC = () => {
-  const { url, isLoading } = useCancelableImg(getImage)
+  const { src, isLoading } = useCancelableImg(getImage)
 
   return (
     <div className='imageListItem'>
       {isLoading && <span>Loading...</span>}
-      {url && <img className='imgPreview' alt='Fetched' src={url} /> }
+      {src && <img className='imgPreview' alt='Fetched' src={src} /> }
     </div>
   )
 }
