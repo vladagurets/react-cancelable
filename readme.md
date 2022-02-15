@@ -1,9 +1,8 @@
-<center>
+<p align="center">
   <h1>react-cancelable</h1>
-  <span><i>Library that improve client's traffic experiense
-</i></span>
+  <span><i>Library that improve client's traffic experiense</i></span>
   <br></br>
-</center>
+</p>
 
 <br />
 
@@ -30,7 +29,7 @@ Make cancelable request. Hook helps you to control request canceling by React Co
 <br />
 
 ```typescript
-type RequestFn = (controller: AbortController) => Promise<any>;
+type RequestFn = (controller: AbortController) => Promise<any>
 
 type Opts = {
   isLazy?: boolean;
@@ -130,7 +129,7 @@ useCancelableReq(fn: RequestFn, opts?: Opts): Artefacts
 <br />
 
 ```jsx
-import React from 'react';
+import React from 'react'
 import { useCancelableReq } from 'react-cancelable'
 
 function makeRequest(controller) {
@@ -168,7 +167,7 @@ Make cancelable request. Hook helps you to cancel requested image.
 <br />
 
 ```typescript
-type RequestFn = (controller: AbortController) => Promise<any>;
+type RequestFn = (controller: AbortController) => Promise<any>
 
 type Opts = {
   isLazy?: boolean;
@@ -268,7 +267,7 @@ useCancelableImg(fn: RequestFn, opts?: Opts): Artefacts
 <br />
 
 ```jsx
-import React from 'react';
+import React from 'react'
 import { useCancelableReq } from 'react-cancelable'
 
 
@@ -304,7 +303,7 @@ Hight order function to create cancelable requests
 <br />
 
 ```typescript
-type RequestFn = (controller: AbortController) => Promise<any>;
+type RequestFn = (controller: AbortController) => Promise<any>
 
 cancelable(fn: RequestFn, controller?: AbortController): Promise<any> & { cancel: VoidFunction}
 ```
