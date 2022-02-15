@@ -1,8 +1,6 @@
-<p align="center">
-  <h1 align="center">react-cancelable</h1>
-  <span><i>Library that improve client's traffic experiense</i></span>
-  <br></br>
-</p>
+<h1 align="center">react-cancelable</h1>
+<span align="center"><i>Library that improve client's traffic experiense</i></span>
+<br></br>
 
 <br />
 
