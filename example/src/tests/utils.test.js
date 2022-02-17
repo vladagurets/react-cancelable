@@ -5,8 +5,14 @@ test('getCTypeHeaderVal', async () => {
   const fetchRes = await fetch('https://httpbin.org/get')
   const axiosRes = await axios.get('https://httpbin.org/get')
 
+  const fetchImgRes = await fetch('https://picsum.photos/200')
+  const axiosImgRes = await axios.get('https://picsum.photos/200')
+
   expect(getCTypeHeaderVal(fetchRes)).toBe('application/json')
   expect(getCTypeHeaderVal(axiosRes)).toBe('application/json')
+
+  expect(getCTypeHeaderVal(fetchImgRes)).toBe('image/jpeg')
+  expect(getCTypeHeaderVal(axiosImgRes)).toBe('image/jpeg')
 })
 
 test('getResParser', async () => {
