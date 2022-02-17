@@ -7,11 +7,15 @@
   "license": "MIT",
   "keywords": ["cancelable", "request", "hooks", "react"],
   "description": "Make cancelable requests with react-hooks",
-  "author": "Vladyslav Ohirenko <aguretsvlad@gmail.com",
+  "author": "Vladyslav Ohirenko <aguretsvlad@gmail.com>",
   "homepage": "https://vladagurets.github.io/react-cancelable/",
   "repository": {
     "type": "git",
     "url": "https://github.com/vladagurets/react-cancelable/"
+  },
+  "bugs": {
+    "url" : "https://github.com/vladagurets/react-cancelable/issues",
+    "email" : "aguretsvlad@gmail.com"
   },
   "scripts": {
     "start": "yarn build && (cd example && yarn start)",
