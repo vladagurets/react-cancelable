@@ -412,7 +412,7 @@ setTimeout(() => {
 
 # Fetch vs Axios
 
-There is no differen what HTTP client you use. Package have one important rule - HTTP client must accept [AbortController signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal).
+There is no difference what HTTP client you use. Package have one important rule - HTTP client must accept [AbortController signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal).
 
 ```javascript
 function makeFetchRequest(controller) {
