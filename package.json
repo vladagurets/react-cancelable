@@ -5,6 +5,7 @@
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "license": "MIT",
+  "keywords": ["cancelable", "request", "hooks", "react"],
   "description": "Make cancelable requests with react-hooks",
   "author": "Vladyslav Ohirenko <aguretsvlad@gmail.com",
   "homepage": "https://vladagurets.github.io/react-cancelable/",
