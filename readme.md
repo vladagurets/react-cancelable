@@ -37,10 +37,10 @@ But don't worry you can easily deal with it with the latest AbortController API 
 # Instalation
 
 ```
-  npm install react-cancelable
+npm install react-cancelable
 ```
 ```
-  yarn add react-cancelable
+yarn add react-cancelable
 ```
 
   <br />
