@@ -18,15 +18,15 @@
     "email" : "aguretsvlad@gmail.com"
   },
   "scripts": {
-    "start": "yarn build && (cd example && yarn start)",
-    "test": "yarn build && yarn test:lazy",
-    "test:lazy": "(cd example && yarn test)",
-    "watch": "tsc -w",
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build:esm": "tsc",
+    "build": "yarn build:esm && yarn build:cjs",
     "pub:alpha": "npm publish --tag alpha",
-    "pub": "npm publish"
+    "pub": "yarn test && npm publish",
+    "start": "yarn build && yarn --cwd ./example start",
+    "test:lazy": "yarn --cwd ./example test",
+    "test": "yarn build && yarn test:lazy",
+    "watch": "tsc -w"
   },
   "peerDependencies": {
     "react": ">=16.8"
