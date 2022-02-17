@@ -52,7 +52,6 @@ Before installation be sure you have installed the required peer dependencies to
 ```json
 {
   "react": "^17.0.0",
-  "react-dom": "^17.0.0"
 }
 ```
 

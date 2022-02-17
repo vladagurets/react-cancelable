@@ -29,8 +29,7 @@
     "pub": "npm publish"
   },
   "peerDependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": ">=16.8"
   },
   "devDependencies": {
     "@types/react": "^17.0.39",
