@@ -35,6 +35,8 @@ But don't worry you can easily deal with it with the latest AbortController API 
 
 # Tools
 
+<br />
+
 ## useCancelableReq
 
 <br />
