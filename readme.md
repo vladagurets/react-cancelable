@@ -400,7 +400,7 @@ import { cancelable } from 'react-cancelable'
 const controller = new AbortController()
 
 function makeRequest(controller) {
-  return fetch("https://httpbin.org/delay/2", { signal: controller.signal })
+  return fetch("YOUR_ENDPOINT", { signal: controller.signal })
 }
 
 // Make requests
