@@ -16,12 +16,13 @@
 # Table of Contents
 
 1. [Motivation](#motivation)
-2. [Tools](#tools)
+2. [Instalation](#instalation)
+3. [Tools](#tools)
     1. [useCancelableReq](#usecancelablereq)
     2. [useCancelableImg](#usecancelableimg)
     3. [cancelable HOF](#cancelable-hof)
-3. [Fetch vs Axios](#fetch-vs-axios)
-4. [Best practices (WIP)](#best-practices)
+4. [Fetch vs Axios](#fetch-vs-axios)
+5. [Best practices (WIP)](#best-practices)
 
 <br />
 
@@ -30,6 +31,30 @@
 In most of cases client consumes a lot of excess traffic. Modern web applications make a huge bunch of requests per conventional time unit then a lot of clients don't wait until all requests made by web app are finished. As a result, the browser expects data that will no longer be used
 
 But don't worry you can easily deal with it with the latest AbortController API and react-cancelable
+
+<br />
+
+# Instalation
+
+```
+  npm install react-cancelable
+```
+```
+  yarn add react-cancelable
+```
+
+  <br />
+
+Before installation be sure you have installed the required peer dependencies to your project
+
+<br />
+
+```json
+{
+  "react": "^17.0.0",
+  "react-dom": "^17.0.0"
+}
+```
 
 <br />
 
