@@ -400,11 +400,11 @@ import { cancelable } from 'react-cancelable'
 const controller = new AbortController()
 
 function makeRequest(controller) {
-  return fetch("YOUR_ENDPOINT", { signal: controller.signal })
+  return fetch("https://httpbin.org/delay/2", { signal: controller.signal })
 }
 
 // Make requests
-new Array(100).fill(0).forEach(() => { cancelable(makeRequest, controller }))
+new Array(100).fill(0).forEach(() => { cancelable(makeRequest, controller) } )
 
 setTimeout(() => {
   // Stop all pending requests
