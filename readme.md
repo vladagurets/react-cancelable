@@ -350,7 +350,9 @@ Hight order function to create cancelable requests
 ```typescript
 type RequestFn = (controller: AbortController) => Promise<any>
 
-cancelable(fn: RequestFn, controller?: AbortController): Promise<any> & { cancel: VoidFunction}
+type RequestPromise = Promise<any> & { cancel: VoidFunction }
+
+cancelable(fn: RequestFn, controller?: AbortController): RequestPromise
 ```
 
 <br />
