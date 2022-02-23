@@ -47,8 +47,8 @@ test('cancelable | wait', async () => {
 })
 
 test('cancelable | reject', async () => {
-  const fetchReq = cancelable((controller) => fetch('https://httpbin.org/delay/3', { signal: controller.signal }))
-  const axiosReq = cancelable((controller) => axios.get('https://httpbin.org/delay/3', { signal: controller.signal }))
+  const fetchReq = cancelable((controller) => fetch('https://httpbin.org/get', { signal: controller.signal }))
+  const axiosReq = cancelable((controller) => axios.get('https://httpbin.org/get', { signal: controller.signal }))
 
   axiosReq.cancel()
   fetchReq.cancel()
