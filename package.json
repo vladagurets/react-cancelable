@@ -1,11 +1,16 @@
 {
   "name": "react-cancelable",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.2-alpha.0",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "license": "MIT",
-  "keywords": ["cancelable", "request", "hooks", "react"],
+  "keywords": [
+    "cancelable",
+    "request",
+    "hooks",
+    "react"
+  ],
   "description": "Make cancelable requests with react-hooks",
   "author": "Vladyslav Ohirenko <aguretsvlad@gmail.com>",
   "homepage": "https://vladagurets.github.io/react-cancelable/",
@@ -14,8 +19,8 @@
     "url": "https://github.com/vladagurets/react-cancelable/"
   },
   "bugs": {
-    "url" : "https://github.com/vladagurets/react-cancelable/issues",
-    "email" : "aguretsvlad@gmail.com"
+    "url": "https://github.com/vladagurets/react-cancelable/issues",
+    "email": "aguretsvlad@gmail.com"
   },
   "scripts": {
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
