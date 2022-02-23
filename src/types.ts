@@ -15,7 +15,7 @@ type BaseCancelableReturn = {
 }
 
 type UseCancelableReqReturn = BaseCancelableReturn & {
-  res?: Response;
+  data?: Response;
 }
 
 type UseCancelableImgReturn = BaseCancelableReturn & {

@@ -12,7 +12,7 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   } = opts || {};
 
   const [isLoading, setIsLoading] = useState(!isLazy);
-  const [res, setRes] = useState<Response>();
+  const [resData, setResData] = useState();
   const [error, setError] = useState<Error>();
 
   const abortController = useMemo(() => controller || new AbortController(), [])
@@ -24,7 +24,7 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   }
 
   function handleSetResData(data: any) {
-    setRes(data)
+    setResData(data)
     setIsLoading(false)
     onComplete?.(data)
   }
@@ -80,7 +80,7 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   }, [])
 
   return {
-    res,
+    data: resData,
     error,
     isLoading,
     cancel,
