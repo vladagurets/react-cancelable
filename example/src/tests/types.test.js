@@ -8,21 +8,23 @@ function getSomething(controller) {
 test('validate useCancelableReq return type', async () => {
   const { result } = renderHook(() => useCancelableReq(getSomething))
 
-  expect(result.current.req).toBe(undefined)
-  expect(result.current.error).toBe(undefined)
+  expect('data' in result.current).toBe(true)
+  expect('error' in result.current).toBe(true)
   expect(result.current.isLoading).toBe(true)
   expect(typeof result.current.cancel).toBe('function')
   expect(result.current.makeLazyRequest).toBe(null)
+  expect('makeLazyRequest' in result.current).toBe(true)
 })
 
 test('validate useCancelableImg return type', async () => {
   const { result } = renderHook(() => useCancelableImg(getSomething))
 
-  expect(result.current.url).toBe(undefined)
-  expect(result.current.error).toBe(undefined)
+  expect('src' in result.current).toBe(true)
+  expect('error' in result.current).toBe(true)
   expect(result.current.isLoading).toBe(true)
   expect(typeof result.current.cancel).toBe('function')
   expect(result.current.makeLazyRequest).toBe(null)
+  expect('makeLazyRequest' in result.current).toBe(true)
 })
 
 test('validate cancelable return type', async () => {

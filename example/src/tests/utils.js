@@ -1,5 +1,5 @@
-export function getSomething(client, url) {
+export function getSomething(client, url, opts) {
   return function(controller) {
-    return client(url, { signal: controller.signal })
+    return client(url, { signal: controller.signal, ...opts })
   }
 }
