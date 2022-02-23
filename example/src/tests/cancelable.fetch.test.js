@@ -1,10 +1,22 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react-hooks'
 import { useCancelableReq, useCancelableImg } from 'react-cancelable'
 import { getSomething } from './utils'
+
+const CANCEL_ERROR_STRING = 'AbortError: Aborted'
 
 beforeAll(() => {
   global.URL.createObjectURL = blob => blob.toString();
 })
+
+test('useCancelableImg (fetch)', async () => {
+  const { result, waitForNextUpdate } = renderHook(() => useCancelableImg(getSomething(fetch, 'https://picsum.photos/50')))
+
+  await waitForNextUpdate({ timeout: 2000 })
+
+  expect(result.current.src).toBe(new Blob().toString())
+})
+
+// ______________
 
 test('useCancelableReq (fetch -> get json)', async () => {
   const { result, waitForNextUpdate } = renderHook(() => useCancelableReq(getSomething(fetch, 'https://httpbin.org/json')))
@@ -49,11 +61,51 @@ test('useCancelableReq (fetch -> get error with body)', async () => {
   expect(typeof result.current.error).toBe('string')
 })
 
-test('useCancelableImg (fetch -> get src)', async () => {
-  const { result, waitForNextUpdate } = renderHook(() => useCancelableImg(getSomething(fetch, 'https://picsum.photos/50')))
+test('useCancelableReq (fetch -> opts.isLazy)', async () => {
+  const { result, waitForNextUpdate } = renderHook(() => useCancelableReq(
+    getSomething(fetch, 'https://httpbin.org/json'),
+    {
+      isLazy: true
+    }
+  ))
+
+  act(() => {
+    result.current.makeLazyRequest()
+  })
 
   await waitForNextUpdate({ timeout: 2000 })
-  
-  expect(result.current.src).toBe(new Blob().toString())
+
+  expect(typeof result.current.data).toBe('object')
+  expect(result.current.res.status).toBe(200)
 })
 
+test('useCancelableImg (fetch -> opts.controller)', async () => {
+  const controller = new AbortController()
+
+  const { result, waitForNextUpdate } = renderHook(() => useCancelableReq(
+    getSomething(fetch, 'https://httpbin.org/json'),
+    {
+      controller
+    }
+  ))
+
+  controller.abort()
+
+  await waitForNextUpdate({ timeout: 2000 })
+
+  expect(result.current.error.toString()).toBe(CANCEL_ERROR_STRING)
+})
+
+test('useCancelableImg (fetch -> artefacts.cancel)', async () => {
+  const { result, waitForNextUpdate } = renderHook(() => useCancelableReq(
+    getSomething(fetch, 'https://httpbin.org/json')
+  ))
+
+  act(() => {
+    result.current.cancel()
+  })
+
+  await waitForNextUpdate({ timeout: 2000 })
+
+  expect(result.current.error.toString()).toBe(CANCEL_ERROR_STRING)
+})
