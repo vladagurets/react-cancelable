@@ -188,8 +188,6 @@ function makeRequest(controller) {
   return fetch("YOUR_ENDPOINT", { signal: controller.signal })
 }
 
-const opts = {}
-
 function Item() {
   const { data, isLoading, error } = useCancelableReq(makeRequest)
 
