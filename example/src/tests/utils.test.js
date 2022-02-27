@@ -2,16 +2,16 @@ import { getResParser, getCTypeHeaderVal } from 'react-cancelable'
 import axios from 'axios'
 
 test('getCTypeHeaderVal', async () => {
-  const fetchRes = await fetch('https://httpbin.org/delay/0')
-  const axiosRes = await axios.get('https://httpbin.org/delay/0')
+  const fetchRes = await fetch('https://httpbin.org/get')
+  const axiosRes = await axios.get('https://httpbin.org/get')
 
   expect(getCTypeHeaderVal(fetchRes)).toBe('application/json')
   expect(getCTypeHeaderVal(axiosRes)).toBe('application/json')
 })
 
 test('getResParser', async () => {
-  const fetchRes = await fetch('https://httpbin.org/delay/0')
-  const axiosRes = await axios.get('https://httpbin.org/delay/0')
+  const fetchRes = await fetch('https://httpbin.org/get')
+  const axiosRes = await axios.get('https://httpbin.org/get')
 
   const fetchCT = getCTypeHeaderVal(fetchRes)
   const axiosCT = getCTypeHeaderVal(axiosRes)

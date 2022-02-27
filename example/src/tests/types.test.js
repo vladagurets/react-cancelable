@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { useCancelableReq, useCancelableImg, cancelable } from 'react-cancelable'
 
 function getSomething(controller) {
-  return fetch(`https://httpbin.org/delay/0`, { signal: controller.signal })
+  return fetch(`https://httpbin.org/get`, { signal: controller.signal })
 }
 
 test('validate useCancelableReq return type', async () => {
