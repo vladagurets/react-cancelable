@@ -52,3 +52,11 @@ export function cancelable(fn: CancelableRequestFn, controller?: AbortController
 
   return promise as ExtendedPromise
 }
+
+export function getErrorBody(data: any) {
+  if (typeof data === 'object' && 'data' in data) {
+    return data.data
+  }
+
+  return data
+}

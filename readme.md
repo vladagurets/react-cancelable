@@ -37,10 +37,10 @@ But don't worry you can easily deal with it with the latest AbortController API 
 # Instalation
 
 ```
-  npm install react-cancelable
+npm install react-cancelable
 ```
 ```
-  yarn add react-cancelable
+yarn add react-cancelable
 ```
 
   <br />
@@ -52,7 +52,6 @@ Before installation be sure you have installed the required peer dependencies to
 ```json
 {
   "react": "^17.0.0",
-  "react-dom": "^17.0.0"
 }
 ```
 
@@ -87,7 +86,8 @@ type Opts = {
 }
 
 type Artefacts = {
-  res?: any;
+  res?: Response;
+  data?: any;
   error?: any;
   isLoading: boolean;
   cancel: VoidFunction,
@@ -142,7 +142,12 @@ useCancelableReq(fn: RequestFn, opts?: Opts): Artefacts
     </tr>
     <tr>
       <td>res</td>
-      <td>Response of a request</td>
+      <td>Response object</td>
+      <td>undefined</td>
+    </tr>
+     <tr>
+    <td>data</td>
+      <td>Payload of a request</td>
       <td>undefined</td>
     </tr>
     <tr>
@@ -183,16 +188,14 @@ function makeRequest(controller) {
   return fetch("YOUR_ENDPOINT", { signal: controller.signal })
 }
 
-const opts = {}
-
 function Item() {
-  const { res, isLoading, error } = useCancelableReq(makeRequest)
+  const { data, isLoading, error } = useCancelableReq(makeRequest)
 
   return (
     <>
       {isLoading && <span>Loading...</span>}
       {error && <span>Error occured</span>}
-      {res && <span>Result is fetched</span>}
+      {data && <span>Data is fetched</span>}
     </>
   )
 }
@@ -225,6 +228,7 @@ type Opts = {
 }
 
 type Artefacts = {
+  res?: Response;
   src?: string;
   error?: any;
   isLoading: boolean;
@@ -276,6 +280,11 @@ useCancelableImg(fn: RequestFn, opts?: Opts): Artefacts
     <tr>
       <td>onCancel</td>
       <td>Trigger after request is canceled</td>
+      <td>undefined</td>
+    </tr>
+    <tr>
+      <td>res</td>
+      <td>Response object</td>
       <td>undefined</td>
     </tr>
     <tr>

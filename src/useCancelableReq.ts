@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
-import { rejectOrCb, getResParser, getCTypeHeaderVal } from "./utils";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { rejectOrCb, getResParser, getCTypeHeaderVal, getErrorBody } from "./utils";
 
 export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableReqReturn {
   const {
@@ -12,19 +12,31 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   } = opts || {};
 
   const [isLoading, setIsLoading] = useState(!isLazy);
-  const [res, setRes] = useState<Response>();
+  const resRef = useRef<Response>();
+  const [resData, setResData] = useState();
   const [error, setError] = useState<Error>();
 
   const abortController = useMemo(() => controller || new AbortController(), [])
 
+  function setResponse(response: Response) {
+    resRef.current = response
+  }
+
   function handleSetError(data: any) {
-    setError(data);
+    const errorBody = getErrorBody(data)
+
+    // Set response object for axios
+    if (data.request) {
+      setResponse(data)
+    }
+
+    setError(errorBody);
     setIsLoading(false);
-    onFail?.(data)
+    onFail?.(errorBody)
   }
 
   function handleSetResData(data: any) {
-    setRes(data)
+    setResData(data)
     setIsLoading(false)
     onComplete?.(data)
   }
@@ -37,6 +49,8 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   function processResult(response: Response, isMounted: boolean) {
     const contentheader = getCTypeHeaderVal(response)
     const resHandler = getResParser(contentheader)
+
+    resRef.current = response;
 
     if (response['data']) {
       // Get `axios` res data
@@ -80,7 +94,8 @@ export default function useCancelableReq(fn: CancelableRequestFn, opts?: UseCanc
   }, [])
 
   return {
-    res,
+    res: resRef.current,
+    data: resData,
     error,
     isLoading,
     cancel,

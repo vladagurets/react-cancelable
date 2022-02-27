@@ -8,6 +8,7 @@ type UseCancelableReqParams = {
 }
 
 type BaseCancelableReturn = {
+  res?: Response;
   error?: Error;
   isLoading: boolean;
   cancel: VoidFunction;
@@ -15,7 +16,7 @@ type BaseCancelableReturn = {
 }
 
 type UseCancelableReqReturn = BaseCancelableReturn & {
-  res?: Response;
+  data?: Response;
 }
 
 type UseCancelableImgReturn = BaseCancelableReturn & {

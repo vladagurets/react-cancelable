@@ -1,11 +1,16 @@
 {
   "name": "react-cancelable",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.2-alpha.2",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "license": "MIT",
-  "keywords": ["cancelable", "request", "hooks", "react"],
+  "keywords": [
+    "cancelable",
+    "request",
+    "hooks",
+    "react"
+  ],
   "description": "Make cancelable requests with react-hooks",
   "author": "Vladyslav Ohirenko <aguretsvlad@gmail.com>",
   "homepage": "https://vladagurets.github.io/react-cancelable/",
@@ -14,30 +19,29 @@
     "url": "https://github.com/vladagurets/react-cancelable/"
   },
   "bugs": {
-    "url" : "https://github.com/vladagurets/react-cancelable/issues",
-    "email" : "aguretsvlad@gmail.com"
+    "url": "https://github.com/vladagurets/react-cancelable/issues",
+    "email": "aguretsvlad@gmail.com"
   },
   "scripts": {
-    "start": "yarn build && (cd example && yarn start)",
-    "test": "yarn build && yarn test:lazy",
-    "test:lazy": "(cd example && yarn test)",
-    "watch": "tsc -w",
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
-    "pub:alpha": "npm publish --tag alpha",
-    "pub": "npm publish"
+    "build:esm": "tsc",
+    "build": "yarn build:esm && yarn build:cjs",
+    "pub": "yarn test --watchAll=false && yarn publish",
+    "start": "yarn build && yarn --cwd ./example start",
+    "test:lazy": "yarn --cwd ./example test",
+    "test": "yarn build && yarn test:lazy",
+    "watch": "tsc -w"
   },
   "peerDependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   },
   "devDependencies": {
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "react": "17",
+    "react-dom": "17"
   },
   "files": [
     "/lib"
