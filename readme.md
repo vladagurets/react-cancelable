@@ -1,5 +1,5 @@
 <h1 align="center">react-cancelable</h1>
-<p align="center"><i>Improve client's traffic experiense</i></span>
+<p align="center"><i>Improve internet traffic experiense</i></span>
 <br></br>
 
 <br />
@@ -28,7 +28,7 @@
 
 # Motivation
 
-In most of cases client consumes a lot of excess traffic. Modern web applications make a huge bunch of requests per conventional time unit then a lot of clients don't wait until all requests made by web app are finished. As a result, the browser expects data that will no longer be used
+In most of cases client consumes a lot of excess internet traffic. Modern web applications make a huge bunch of requests per conventional time unit then a lot of clients don't wait until all requests made by web app are finished. As a result, the browser expects data that will no longer be used
 
 But don't worry you can easily deal with it with the latest AbortController API and react-cancelable
 
