@@ -3,7 +3,7 @@ import useCancelableReq from "./useCancelableReq";
 
 /**
  * @description Hook to prepare cancelable image request.
- * `fn` must return a Request as Blob
+ * `fn` must return a Request with Blob response
  */
 export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableImgReturn {
   const {
