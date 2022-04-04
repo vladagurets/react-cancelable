@@ -2,7 +2,7 @@ import { useState } from "react";
 import useCancelableReq from "./useCancelableReq";
 
 /**
- * @description Hook to prepare cencelable image request.
+ * @description Hook to prepare cancelable image request.
  * `fn` must return a Request as Blob
  */
 export default function useCancelableImg(fn: CancelableRequestFn, opts?: UseCancelableReqParams): UseCancelableImgReturn {
