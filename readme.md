@@ -1,5 +1,5 @@
 <h1 align="center">react-cancelable</h1>
-<p align="center"><i>Improve internet traffic experiense</i></span>
+<p align="center"><i>Internet traffic economizer</i></span>
 <br></br>
 
 <br />
