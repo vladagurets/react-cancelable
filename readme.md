@@ -5,8 +5,8 @@
 <br />
 
 [![version][npm-version-badge]][npm-url]
-<!-- [![downloads][total-downloads-badge]][npm-url] -->
 [![downloads][weekly-downloads-badge]][npm-url]
+<!-- [![downloads][total-downloads-badge]][npm-url] -->
 
 [npm-url]: https://www.npmjs.com/package/react-cancelable
 [npm-version-badge]: https://badge.fury.io/js/react-cancelable.svg
