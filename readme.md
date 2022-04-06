@@ -5,11 +5,13 @@
 <br />
 
 [![version][npm-version-badge]][npm-url]
-[![downloads][total-downloads-badge]][npm-url]
+<!-- [![downloads][total-downloads-badge]][npm-url] -->
+[![downloads][weekly-downloads-badge][npm-url]
 
 [npm-url]: https://www.npmjs.com/package/react-cancelable
 [npm-version-badge]: https://badge.fury.io/js/react-cancelable.svg
 [total-downloads-badge]: https://img.shields.io/npm/dt/react-cancelable.svg
+[weekly-downloads-badge]: https://img.shields.io/npm/dm/react-cancelable.svg
 
 <br />
 
