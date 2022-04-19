@@ -28,9 +28,11 @@
 
 # Motivation
 
-In most of cases client consumes a lot of excess internet traffic. Modern web applications make a huge bunch of requests per conventional time unit then a lot of clients don't wait until all requests made by web app are finished. As a result, the browser expects data that will no longer be used
+In most of cases client consumes a lot of excess internet traffic. Modern web applications make a huge bunch of requests per conventional time unit then a lot of clients don't wait until all requests made by web app are finished. As a result, the browser expects data that will no longer be used.
 
-But don't worry you can easily deal with it with the latest AbortController API and react-cancelable
+<!-- But don't worry you can easily deal with it with the latest AbortController API and react-cancelable -->
+
+With react-cancelable you can easily cancel requests at any step of the [request's lifecycle](https://dev.to/dangolant/things-i-brushed-up-on-this-week-the-http-request-lifecycle-) and consume fewer traffic bytes.
 
 <br />
 
