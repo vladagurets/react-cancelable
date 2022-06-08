@@ -1,3 +1,5 @@
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://www.supportukraine.co/)
+
 <h1 align="center">react-cancelable</h1>
 <p align="center"><i>Internet traffic economizer</i></span>
 <br></br>
