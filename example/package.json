@@ -10,22 +10,18 @@
     "url": "https://github.com/vladagurets/react-cancelable/"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.3",
-    "@testing-library/react-hooks": "^7.0.2",
-    "gh-pages": "^3.2.3",
-    "react-test-renderer": "^17.0.2"
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/user-event": "^14.4.3",
+    "gh-pages": "^4.0.0",
+    "react-test-renderer": "^18.2.0"
   },
   "dependencies": {
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^29.1.2",
     "@types/node": "^16.7.13",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
     "axios": "^0.26.0",
-    "react": "^18.2.0",
     "react-cancelable": "link:..",
-    "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.0"
